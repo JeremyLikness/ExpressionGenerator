@@ -1,0 +1,40 @@
+﻿{
+  "condition": "and",
+  "rules": [
+    {
+      "label": "Category",
+      "field": "Category",
+      "operator": "in",
+      "type": "string",
+      "value": [
+        "Clothing"
+      ]
+    },
+    {
+      "condition": "or",
+      "rules": [
+        {
+          "label": "TransactionType",
+          "field": "TransactionType",
+          "operator": "equal",
+          "type": "boolean",
+          "value": "income"
+        },
+        {
+          "label": "PaymentMode",
+          "field": "PaymentMode",
+          "operator": "equal",
+          "type": "string",
+          "value": "Credit"
+        }
+      ]
+    },
+    {
+      "label": "Amount",
+      "field": "Amount",
+      "operator": "equal",
+      "type": "number",
+      "value": 10
+    }
+  ]
+}

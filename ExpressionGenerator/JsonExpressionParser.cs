@@ -77,7 +77,7 @@ namespace ExpressionGenerator
             return left;
         }
 
-        public Func<T, bool> ParsePredicateOf<T>(JsonDocument doc)
+        public Expression<Func<T, bool>> ParseExpressionOf<T>(JsonDocument doc)
         {
             var itemExpression = Expression.Parameter(typeof(T));
             var conditions = ParseTree<T>(doc.RootElement, itemExpression);
@@ -87,9 +87,14 @@ namespace ExpressionGenerator
             }
 
             Console.WriteLine(conditions.ToString());
-            Console.ReadLine();
 
             var query = Expression.Lambda<Func<T, bool>>(conditions, itemExpression);
+            return query;
+        }
+
+        public Func<T, bool> ParsePredicateOf<T>(JsonDocument doc)
+        {
+            var query = ParseExpressionOf<T>(doc);
             return query.Compile();
         }
     }
